@@ -56,3 +56,33 @@ enum API {
         }.resume()
     }
 }
+
+protocol APIProtocol {
+    static func getPugList(_ callback:@escaping (Error?, [Pug]?) -> ()) 
+    static func getPugInfo(_ pugId:String, _ callback:@escaping (Error?, PugInfo?) -> ())
+}
+
+extension API: APIProtocol {}
+
+enum MockAPI: APIProtocol {
+    static func getPugList(_ callback: @escaping (Error?, [Pug]?) -> ()) {
+        //1. 模擬 Empty 狀態
+        callback(nil, [])
+        
+        //2. 模擬 Error
+//        callback(NSError.init(domain: "", code: 0, userInfo: nil), nil)
+        
+        //3. 模擬 Loading 狀態：（空白，不 callback）
+//
+        
+        //4. 模擬 Normal 狀態
+//        callback(nil,
+//                 [.init(pugId: "tedthepug0810",
+//                             name: "小巴哥",
+//                             photo: "https://fengyi-line.github.io/Puglist/api/image/ted.jpg")])
+    }
+    
+    static func getPugInfo(_ pugId: String, _ callback: @escaping (Error?, PugInfo?) -> ()) {
+        
+    }
+}

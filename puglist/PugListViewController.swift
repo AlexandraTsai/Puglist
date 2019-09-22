@@ -23,6 +23,17 @@ enum PugListViewControllerState {
 
 class PugListViewController: UIViewController {
     
+    var api: APIProtocol.Type
+    
+    init(api: APIProtocol.Type) {
+        self.api = api
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var centerLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.autoresizingMask = [.flexibleWidth,.flexibleHeight]
@@ -89,7 +100,7 @@ class PugListViewController: UIViewController {
     @objc
     func refresh() {
         state = .loading
-        API.getPugList {[weak self] (error, pugs) in
+        api.getPugList {[weak self] (error, pugs) in
             if let error = error {
                 self?.state = .error(error)
                 return
