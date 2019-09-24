@@ -24,6 +24,8 @@ enum PugInfoViewControllerState {
 
 class PugInfoViewController: UIViewController {
     
+    var api: API
+    
     lazy var centerLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.autoresizingMask = [.flexibleWidth,.flexibleHeight]
@@ -65,8 +67,9 @@ class PugInfoViewController: UIViewController {
     
     let pugId: String
     
-    init(pugId: String) {
+    init(pugId: String, api: API) {
         self.pugId = pugId
+        self.api = api
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -91,7 +94,7 @@ class PugInfoViewController: UIViewController {
     @objc
     func refresh() {
         state = .loading
-        API.getPugInfo(pugId) {[weak self] (error, pugInfo) in
+        api.getPugInfo(pugId) {[weak self] (error, pugInfo) in
             if let error = error {
                 self?.state = .error(error)
                 return

@@ -23,9 +23,9 @@ enum PugListViewControllerState {
 
 class PugListViewController: UIViewController {
     
-    var api: APIProtocol.Type
+    var api: API
     
-    init(api: APIProtocol.Type) {
+    init(api: API) {
         self.api = api
         super.init(nibName: nil, bundle: nil)
     }
@@ -122,7 +122,7 @@ extension PugListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pugItem = pugs[indexPath.row]
-        self.navigationController?.pushViewController(PugInfoViewController(pugId: pugItem.pugId), animated: true)
+        self.navigationController?.pushViewController(PugInfoViewController(pugId: pugItem.pugId, api: api), animated: true)
     }
 }
 

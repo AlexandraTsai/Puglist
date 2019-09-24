@@ -17,7 +17,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
-        window?.rootViewController  = UINavigationController(rootViewController: PugListViewController(api: MockAPI.self))
+        
+        var mockAPI = API()
+        // 1. Empty
+//        mockAPI.getPugList = { callback in
+//            callback(nil, [])
+//        }
+        
+        // 2. Error
+//        mockAPI.getPugList = { callback in
+//            callback(NSError.init(domain: "", code: 0, userInfo: nil), nil)
+//        }
+        
+        // 3. Loading
+//        mockAPI.getPugList = { callback in
+//
+//        }
+        
+        // 4. Normal
+        mockAPI.getPugList = { callback in
+            callback(nil,
+                     [.init(pugId: "tedthepug0810",
+                            name: "小巴哥",
+                            photo: "https://fengyi-line.github.io/Puglist/api/image/ted.jpg")])
+        }
+        
+        window?.rootViewController  = UINavigationController(rootViewController: PugListViewController(api: mockAPI))
         window?.makeKeyAndVisible()
         
         return true
