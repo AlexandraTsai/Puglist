@@ -13,7 +13,7 @@ struct API {
     var getPugInfo = getPugInfo(_: _:)
 }
 
-func getPugList(_ callback:@escaping (Error?, [Pug]?) -> ()) {
+private func getPugList(_ callback:@escaping (Error?, [Pug]?) -> ()) {
     URLSession.shared.dataTask(
         with: URL(string: "https://fengyi-line.github.io/Puglist/api/list.json")!
     ) { (data, response, error) in
@@ -36,7 +36,7 @@ func getPugList(_ callback:@escaping (Error?, [Pug]?) -> ()) {
         }.resume()
 }
 
-func getPugInfo(_ pugId:String, _ callback:@escaping (Error?, PugInfo?) -> ()) {
+private func getPugInfo(_ pugId:String, _ callback:@escaping (Error?, PugInfo?) -> ()) {
     URLSession.shared.dataTask(
         with: URL(string: "https://fengyi-line.github.io/Puglist/api/info/\(pugId).json")!
     ) { (data, response, error) in
