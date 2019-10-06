@@ -25,7 +25,7 @@ class PugListViewController: UIViewController {
     
     var api: APIProtocol.Type
     
-    init(api: APIProtocol.Type) {
+    init(api: APIProtocol.Type = API.self) {
         self.api = api
         super.init(nibName: nil, bundle: nil)
     }
