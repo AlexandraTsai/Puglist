@@ -25,7 +25,7 @@ class PugListViewController: UIViewController {
     
     var api: API
     
-    init(api: API) {
+    init(api: API = API()) {
         self.api = api
         super.init(nibName: nil, bundle: nil)
     }
